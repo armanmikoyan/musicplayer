@@ -1,0 +1,2 @@
+# musicplayer
+Qt, socket, C++
