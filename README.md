@@ -1,6 +1,6 @@
-# Project Name
+# Spotify
 
-A simple C++ server using TCP sockets with a Qt 6 front end.
+C++ server using TCP sockets with a Qt 6 front end.
 
 ## Overview
 
@@ -10,7 +10,7 @@ This project consists of a C++ server implemented with TCP sockets and a Qt 6 fr
 
 - C++ compiler with C++17 support
 - Qt 6 development libraries
-- CMake (minimum version x.x.x)
+
 
 ## Build Instructions
 
@@ -34,4 +34,4 @@ This project consists of a C++ server implemented with TCP sockets and a Qt 6 fr
    ```bash
    cd server/build/
    ./ServerExecutable
-
+   ```
