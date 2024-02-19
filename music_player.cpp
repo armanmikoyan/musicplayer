@@ -30,7 +30,7 @@ void music_player::initialRequestStart()
 
 void music_player::Ondisconected()
 {
-    qDebug() << "Disconnected to the server\n";
+    qDebug() << "Disconnected to the server \n";
 }
 
 void music_player::initial_requests_handler()
