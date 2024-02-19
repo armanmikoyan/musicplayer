@@ -54,22 +54,33 @@ private slots:
     void onMusicClicked(QListWidgetItem*);
     void streamRequest();
 
+// ui manipulations
+private:
+    void uiConnections();
+
+private slots:
+    void onPlayBtnClicked();
+    void onNextBtnClicked();
+    void onPrevBtnClicked();
+    void onPlay();
+
 signals:
     void request();
+    void play();
 
 
 
 
 private:
-    Ui::MainWindow *ui;
-    QMediaPlayer *media_player;
-    QAudioOutput *audioOutput;
-    QStringList music_files;
-    static inline int current_music_index = 0;
-    QTcpSocket *socket;
-    QString current_music_name;
-    QBuffer *buffer;
-    std::queue<QString> request_queue;
+    Ui::MainWindow *ui{};
+    QMediaPlayer *media_player{};
+    QAudioOutput *audioOutput{};
+    QStringList music_files{};
+    static inline int current_music_index{};
+    QTcpSocket *socket{};
+    QString current_music_name{};
+    QBuffer *buffer{};
+    std::queue<QString> request_queue{};
 
 };
 

@@ -8,6 +8,7 @@ music_player::music_player(Ui::MainWindow *ui, QObject *parent)
     setupPlayer();
     socketConnections();
     initialRequestsQueue();
+    uiConnections();
 }
 
 // network manipulations
@@ -84,10 +85,29 @@ void music_player::responseMusicNamesUi(const QString& names)
 
 // stream manipulations
 
+void music_player::onPlay()
+{
+    ui->current_music->setText(current_music_name);
+    ui->curr_id->setText(QString::number(current_music_index + 1));
+
+    if (socket->state() != QTcpSocket::ConnectedState)
+    {
+        socket->connectToHost("127.0.0.1", 8080);
+    }
+    else
+    {
+        resetPlayer();
+        emit request();
+    }
+    qDebug() << current_music_name;
+}
+
+
 void music_player::streamConnections() const
 {
     connect(socket, &QTcpSocket::connected, this, &music_player::streamRequest);
     connect(this, &music_player::request, this, &music_player::streamRequest);
+    connect(this, &music_player::play, this, &music_player::onPlay);
     connect(socket, &QTcpSocket::readyRead, this, &music_player::OnReadyStream);
     connect(ui->music_list, &QListWidget::itemClicked, this, &music_player::onMusicClicked);
 }
@@ -146,19 +166,7 @@ void music_player::onMusicClicked(QListWidgetItem* item)
         }
     }
 
-    ui->current_music->setText(current_music_name);
-    ui->curr_id->setText(QString::number(current_music_index + 1));
-
-    if (socket->state() != QTcpSocket::ConnectedState)
-    {
-        socket->connectToHost("127.0.0.1", 8080);
-    }
-    else
-    {
-        resetPlayer();
-        emit request();
-    }
-    qDebug() << current_music_name;
+   emit play();
 }
 
 void music_player::resetPlayer()
@@ -171,3 +179,55 @@ void music_player::resetPlayer()
     buffer = new QBuffer(this);
     media_player->setSourceDevice(buffer);
 }
+
+// ui manipulations
+void music_player::uiConnections()
+{
+    connect(ui->play_btn, &QPushButton::clicked, this, &music_player::onPlayBtnClicked);
+    connect(ui->next_btn, &QPushButton::clicked, this, &music_player::onNextBtnClicked);
+    connect(ui->prev_btn, &QPushButton::clicked, this, &music_player::onPrevBtnClicked);
+    connect(ui->play_btn, &QPushButton::clicked, this, &music_player::onPlayBtnClicked);
+}
+
+void music_player::onPlayBtnClicked()
+{
+    if (current_music_name.isEmpty())
+    {
+        ui->statusbar->showMessage("Choose music", 3000);
+        return;
+    }
+    if (media_player->playbackState() == QMediaPlayer::PlayingState)
+    {
+        media_player->pause();
+    }
+    else if(media_player->playbackState() == QMediaPlayer::PausedState)
+    {
+        media_player->play();
+    }
+
+}
+
+void music_player::onNextBtnClicked()
+{
+    ++current_music_index;
+    if (current_music_index >= music_files.size())
+    {
+        current_music_index = 0;
+    }
+    current_music_name = music_files[current_music_index];
+
+    emit play();
+}
+
+void music_player::onPrevBtnClicked()
+{
+    --current_music_index;
+    if (current_music_index < 0)
+    {
+        current_music_index = music_files.size() - 1;
+    }
+    current_music_name = music_files[current_music_index];
+
+    emit play();
+}
+
