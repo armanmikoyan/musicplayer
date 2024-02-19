@@ -10,8 +10,6 @@ music_player::music_player(Ui::MainWindow *ui, QObject *parent)
     initial_requests_queue();
 }
 
-
-
 // network manipulations
 
 void music_player::socket_connections() const
@@ -30,7 +28,7 @@ void music_player::initialRequestStart()
 
 void music_player::Ondisconected()
 {
-    qDebug() << "Disconnected to the server \n";
+    qDebug() << "Disconnected to the server\n";
 }
 
 void music_player::initial_requests_handler()
@@ -43,8 +41,9 @@ void music_player::initial_requests_handler()
         qDebug() <<"Response: " << names << "\n";
         response_music_names_ui(names);
     }
-    // and so on
+    // handle andother meta requests...
 
+     // swiching to the stream
     if (request_queue.empty())
     {
         socket->disconnectFromHost();
@@ -79,11 +78,11 @@ void music_player::response_music_names_ui(const QString& names)
     ui->length->setText(QString::number(music_files.size()));
     ui->curr_id->setText("1");
 }
-
 // ------------------ end intial requests
 
 
 
+// stream manipulations
 
 void music_player::stream_connections() const
 {
@@ -92,7 +91,6 @@ void music_player::stream_connections() const
     connect(socket, &QTcpSocket::readyRead, this, &music_player::OnReadyStream);
     connect(ui->music_list, &QListWidget::itemClicked, this, &music_player::onMusicClicked);
 }
-
 
 void music_player::OnReadyStream()
 {
@@ -162,7 +160,6 @@ void music_player::onMusicClicked(QListWidgetItem* item)
     }
     qDebug() << current_music_name;
 }
-
 
 void music_player::reset_player()
 {
