@@ -89,6 +89,7 @@ void music_player::onPlay()
 {
     ui->current_music->setText(current_music_name);
     ui->curr_id->setText(QString::number(current_music_index + 1));
+    ui->statusbar->showMessage(current_music_name, 5000);
 
     if (socket->state() != QTcpSocket::ConnectedState)
     {
