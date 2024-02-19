@@ -14,6 +14,7 @@
 #include <QTcpSocket>
 #include <QCoreApplication>
 #include <Qbuffer>
+#include <queue>
 
 
 class music_player : public QObject
@@ -23,46 +24,50 @@ class music_player : public QObject
 public:
     explicit music_player(Ui::MainWindow*, QObject *parent = nullptr);
 
+
+// network manipulations (slots);
 private slots:
-    void play_btn_clicked(bool = true);
+    void initialRequestStart();
+    void OnReadyStream();
+    void initial_requests_handler();
+    void Ondisconected();
 
-    void next_btn_clicked();
+// network manipulations (helpers);
+private:
+    void socket_connections() const;
+    void next_request();
+    void initial_requests_queue();
 
-    void prev_btn_clicked();
+// response handlers
+private:
+    void response_music_names_ui(const QString&);
 
-    void vertical_slider_triggered(int);
-
-    void music_clicked(QListWidgetItem* item);
-    void get_music();
+private:
+// stream manipulations
+    void stream_connections() const;
+    void setup_player();
+    void reset_player();
     void stream_music();
 
-private:
-    void connections() const;
-    void setup_music_playlist();
-    void ui_render();
-    void get_music_names();
-    void draw_music_names();
-    void change_current_music(const QString &);
-    void reset_buffer_and_media_player();
+// stream slots
+private slots:
+    void onMusicClicked(QListWidgetItem*);
+    void streamRequest();
 
+signals:
+    void request();
 
 private:
-    Ui::MainWindow* ui;
-
+    Ui::MainWindow *ui;
     QMediaPlayer *media_player;
-    QAudioOutput* audioOutput;
+    QAudioOutput *audioOutput;
     QStringList music_files;
     static inline int current_music_index = 0;
-    bool play_button_state;
-    QTcpSocket* socket;
+    QTcpSocket *socket;
     QString current_music_name;
-    QBuffer* buffer = nullptr;
+    QBuffer *buffer;
+    std::queue<QString> request_queue;
 
-private:
-    QIcon playIcon;
-    QIcon stopIcon;
-    QIcon nextIcon;
-    QIcon prevtIcon;
 };
 
 #endif // MUSIC_PLAYER_HPP
