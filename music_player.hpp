@@ -29,25 +29,25 @@ public:
 private slots:
     void initialRequestStart();
     void OnReadyStream();
-    void initial_requests_handler();
+    void initialRequestsHandler();
     void Ondisconected();
 
 // network manipulations (helpers);
 private:
-    void socket_connections() const;
-    void next_request();
-    void initial_requests_queue();
+    void socketConnections() const;
+    void nextRequest();
+    void initialRequestsQueue();
 
 // response handlers
 private:
-    void response_music_names_ui(const QString&);
+    void responseMusicNamesUi(const QString&);
 
 private:
 // stream manipulations
-    void stream_connections() const;
-    void setup_player();
-    void reset_player();
-    void stream_music();
+    void streamConnections() const;
+    void setupPlayer();
+    void resetPlayer();
+    void streamMusic();
 
 // stream slots
 private slots:
@@ -56,6 +56,9 @@ private slots:
 
 signals:
     void request();
+
+
+
 
 private:
     Ui::MainWindow *ui;
