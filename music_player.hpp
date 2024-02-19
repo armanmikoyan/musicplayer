@@ -57,6 +57,7 @@ private slots:
 // ui manipulations
 private:
     void uiConnections();
+    void uiSetup();
 
 private slots:
     void onPlayBtnClicked();
@@ -68,9 +69,6 @@ private slots:
 signals:
     void request();
     void play();
-
-
-
 
 private:
     Ui::MainWindow *ui{};

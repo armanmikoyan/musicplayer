@@ -52,7 +52,7 @@
        <x>20</x>
        <y>70</y>
        <width>517</width>
-       <height>114</height>
+       <height>136</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -82,17 +82,22 @@
                 <property name="styleSheet">
                  <string notr="true">#prev_btn {
     background-color: #3498db; /* Button background color */
-    color: white; /* Button text color */
+    
     border: 1px solid #3498db; /* Button border color */
     padding: 8px 16px; /* Padding around the text */
-    font-size: 14px; /* Font size of the text */
+    font-size: 20px; /* Font size of the text */
     border-radius: 5px; /* Rounded corners */
+ 	color: black; 	
+	font-weight: bold;
 }
+
 
 #prev_btn:hover {
     background-color: #2980b9; /* Button background color on hover */
     border: 1px solid #2980b9; /* Button border color on hover */
-}</string>
+}
+
+</string>
                 </property>
                 <property name="text">
                  <string/>
@@ -107,11 +112,12 @@
                 <property name="styleSheet">
                  <string notr="true">#play_btn {
     background-color: #3498db; /* Button background color */
-    color: white; /* Button text color */
     border: 1px solid #3498db; /* Button border color */
     padding: 8px 16px; /* Padding around the text */
-    font-size: 14px; /* Font size of the text */
+    font-size: 20px; /* Font size of the text */
     border-radius: 5px; /* Rounded corners */
+ 	color: black; 	
+	font-weight: bold;
 }
 
 #play_btn:hover {
@@ -128,12 +134,12 @@
                <widget class="QPushButton" name="next_btn">
                 <property name="styleSheet">
                  <string notr="true">#next_btn {
-    background-color: #3498db; /* Button background color */
-    color: white; /* Button text color */
-    border: 1px solid #3498db; /* Button border color */
+    background-color: #3498db; /* Button background color */   border: 1px solid #3498db; /* Button border color */
     padding: 8px 16px; /* Padding around the text */
-    font-size: 14px; /* Font size of the text */
+    font-size: 20px; /* Font size of the text */
     border-radius: 5px; /* Rounded corners */
+ 	color: black; 	
+	font-weight: bold;
 }
 
 #next_btn:hover {

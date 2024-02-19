@@ -9,6 +9,7 @@ music_player::music_player(Ui::MainWindow *ui, QObject *parent)
     socketConnections();
     initialRequestsQueue();
     uiConnections();
+    uiSetup();
 }
 
 // network manipulations
@@ -200,10 +201,12 @@ void music_player::onPlayBtnClicked()
     if (media_player->playbackState() == QMediaPlayer::PlayingState)
     {
         media_player->pause();
+        ui->play_btn->setText("< >");
     }
     else if(media_player->playbackState() == QMediaPlayer::PausedState)
     {
         media_player->play();
+        ui->play_btn->setText("| |");
     }
 
 }
@@ -237,4 +240,13 @@ void music_player::onVerticalSliderTrigered(int value)
     qreal volume = static_cast<qreal>(value) / ui->vertical_slider->maximum();
     audioOutput->setVolume(volume);
 }
+
+void music_player::uiSetup()
+{
+    ui->prev_btn->setText("<");
+    ui->next_btn->setText(">");
+    ui->play_btn->setText("| |");
+}
+
+
 
