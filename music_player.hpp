@@ -62,6 +62,7 @@ private slots:
     void onPlayBtnClicked();
     void onNextBtnClicked();
     void onPrevBtnClicked();
+    void onVerticalSliderTrigered(int value);
     void onPlay();
 
 signals:

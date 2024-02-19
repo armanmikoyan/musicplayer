@@ -186,7 +186,7 @@ void music_player::uiConnections()
     connect(ui->play_btn, &QPushButton::clicked, this, &music_player::onPlayBtnClicked);
     connect(ui->next_btn, &QPushButton::clicked, this, &music_player::onNextBtnClicked);
     connect(ui->prev_btn, &QPushButton::clicked, this, &music_player::onPrevBtnClicked);
-    connect(ui->play_btn, &QPushButton::clicked, this, &music_player::onPlayBtnClicked);
+    connect(ui->vertical_slider, &QSlider::sliderMoved, this, &music_player::onVerticalSliderTrigered);
 }
 
 void music_player::onPlayBtnClicked()
@@ -229,5 +229,12 @@ void music_player::onPrevBtnClicked()
     current_music_name = music_files[current_music_index];
 
     emit play();
+}
+
+void music_player::onVerticalSliderTrigered(int value)
+{
+    qDebug() << value;
+    qreal volume = static_cast<qreal>(value) / ui->vertical_slider->maximum();
+    audioOutput->setVolume(volume);
 }
 
