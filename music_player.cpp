@@ -233,7 +233,6 @@ void music_player::onPrevBtnClicked()
 
 void music_player::onVerticalSliderTrigered(int value)
 {
-    qDebug() << value;
     qreal volume = static_cast<qreal>(value) / ui->vertical_slider->maximum();
     audioOutput->setVolume(volume);
 }
