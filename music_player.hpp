@@ -27,16 +27,16 @@ public:
 
 // network manipulations (slots);
 private slots:
-    void initialRequestStart();
-    void OnReadyStream();
+    void    initialRequestStart();
+    void          OnReadyStream();
     void initialRequestsHandler();
-    void Ondisconected();
+    void          Ondisconected();
 
 // network manipulations (helpers);
 private:
     void socketConnections() const;
-    void nextRequest();
-    void initialRequestsQueue();
+    void             nextRequest();
+    void    initialRequestsQueue();
 
 // response handlers
 private:
@@ -45,41 +45,41 @@ private:
 private:
 // stream manipulations
     void streamConnections() const;
-    void setupPlayer();
-    void resetPlayer();
-    void streamMusic();
+    void             setupPlayer();
+    void             resetPlayer();
+    void             streamMusic();
 
 // stream slots
 private slots:
     void onMusicClicked(QListWidgetItem*);
-    void streamRequest();
+    void                  streamRequest();
 
 // ui manipulations
 private:
     void uiConnections();
-    void uiSetup();
+    void       uiSetup();
 
 private slots:
-    void onPlayBtnClicked();
-    void onNextBtnClicked();
-    void onPrevBtnClicked();
+    void                  onPlayBtnClicked();
+    void                  onNextBtnClicked();
+    void                  onPrevBtnClicked();
     void onVerticalSliderTrigered(int value);
-    void onPlay();
+    void                            onPlay();
 
 signals:
     void request();
-    void play();
+    void    play();
 
 private:
-    Ui::MainWindow *ui{};
-    QMediaPlayer *media_player{};
-    QAudioOutput *audioOutput{};
-    QStringList music_files{};
+    Ui::MainWindow                    *ui{};
+    QMediaPlayer            *media_player{};
+    QAudioOutput             *audioOutput{};
+    QStringList               music_files{};
     static inline int current_music_index{};
-    QTcpSocket *socket{};
-    QString current_music_name{};
-    QBuffer *buffer{};
-    std::queue<QString> request_queue{};
+    QTcpSocket                    *socket{};
+    QString            current_music_name{};
+    QBuffer                       *buffer{};
+    std::queue<QString>     request_queue{};
 
 };
 

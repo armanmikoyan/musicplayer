@@ -104,7 +104,6 @@ void music_player::onPlay()
     qDebug() << current_music_name;
 }
 
-
 void music_player::streamConnections() const
 {
     connect(socket, &QTcpSocket::connected, this, &music_player::streamRequest);
@@ -131,7 +130,7 @@ void music_player::streamMusic()
 
     QByteArray data = socket->readAll();
     if (!buffer || media_player->mediaStatus() != QMediaPlayer::BufferedMedia &&
-                       media_player->mediaStatus() != QMediaPlayer::LoadingMedia)
+                   media_player->mediaStatus() != QMediaPlayer::LoadingMedia)
     {
         resetPlayer();
     }

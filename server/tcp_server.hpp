@@ -108,7 +108,6 @@ private:
       {
          music_file.read(buffer, 1026);
          int bytesRead = music_file.gcount();
-
          if (bytesRead > 0)
          {
             send(client_socket, buffer, bytesRead, 0);
